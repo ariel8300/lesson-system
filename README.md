@@ -13,6 +13,9 @@ private lessons management system
 ## Technologies
 
 Angular CLI: 15.1.2
+Angular Material: 15.1.1
+Typescript: 4.9.4
+RxJS: 7.8.0
 
 ## Setup
 
