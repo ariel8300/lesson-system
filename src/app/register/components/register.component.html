@@ -1,25 +1,53 @@
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-  <input
-    matInput
-    type="email"
-    formControlName="email"
-    placeholder="Email Address"
-  />
-  <input
-    matInput
-    type="password"
-    formControlName="password"
-    placeholder="Password"
-  />
-  <input
-    matInput
-    type="password"
-    formControlName="passwordConfirm"
-    placeholder="Confirm Password"
-  />
-  <mat-error *ngIf="registerForm.errors?.['match_error']">
-    Passwords do not match
-  </mat-error>
+  <mat-form-field appearance="fill">
+    <mat-label>Email Address</mat-label>
+    <input matInput type="email" formControlName="email" />
+    <mat-error *ngIf="registerForm.controls['email'].hasError('required')">
+      Email is required
+    </mat-error>
+    <mat-error *ngIf="registerForm.controls['email'].hasError('email')">
+      Email is invalid
+    </mat-error>
+  </mat-form-field>
 
-  <button type="submit" [disabled]="!registerForm.valid">Submit</button>
+  <mat-form-field appearance="fill">
+    <mat-label>Password</mat-label>
+    <input matInput type="password" formControlName="password" />
+    <mat-error *ngIf="registerForm.controls['password'].hasError('minlength')">
+      Password must be at least 8 characters long
+    </mat-error>
+    <mat-error *ngIf="registerForm.controls['password'].hasError('required')">
+      Password is required
+    </mat-error>
+    <mat-error *ngIf="registerForm.controls['password'].hasError('maxlength')">
+      Password cannot be more than 20 characters long
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Confirm Password</mat-label>
+    <input matInput type="password" formControlName="passwordConfirm" />
+    <mat-error *ngIf="registerForm.errors?.['match_error']">
+      Passwords do not match
+    </mat-error>
+    <mat-error
+      *ngIf="registerForm.controls['passwordConfirm'].hasError('required')"
+    >
+      Confirm Password is required
+    </mat-error>
+    <mat-error
+      *ngIf="registerForm.controls['passwordConfirm'].hasError('minlength')"
+    >
+      Confirm Password must be at least 8 characters long
+    </mat-error>
+    <mat-error
+      *ngIf="registerForm.controls['passwordConfirm'].hasError('maxlength')"
+    >
+      Confirm Password cannot be more than 20 characters long
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-flat-button type="submit" [disabled]="!registerForm.valid">
+    Submit
+  </button>
 </form>
