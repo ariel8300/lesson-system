@@ -20,7 +20,7 @@ export class RegisterService {
   constructor(private http: HttpClient) {}
 
   register(user: User) {
-    const API_URL = `${this.REST_API}/add-user`;
+    const API_URL = `${this.REST_API}/users`;
 
     return this.http.post(API_URL, user).pipe(catchError(this.handleError));
   }

@@ -50,18 +50,25 @@ export class RegisterComponent {
         password: this.registerForm.value.password as string,
       };
 
-      this.registerService.register(user).subscribe((res) => {
-        console.log({res});
-
-        // on success redirect to login page
-        // Swal.fire({
-        //   title: 'Success!',
-        //   text: 'You have successfully registered!',
-        //   icon: 'success',
-        //   timer: 2000,
-        // }).then(() => {
-        this.router.navigate(['/login']);
-        // });
+      this.registerService.register(user).subscribe((res: any) => {
+        if (res.success) {
+          Swal.fire({
+            title: 'Success!',
+            text: 'You have successfully registered!',
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 2000,
+          }).then(() => {
+            this.router.navigate(['/login']);
+          });
+        } else {
+          Swal.fire({
+            title: 'Oh no!',
+            text: res.message,
+            icon: 'error',
+            showConfirmButton: true,
+          });
+        }
       });
     }
   }
