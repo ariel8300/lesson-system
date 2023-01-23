@@ -5,5 +5,11 @@
     <mat-icon>login</mat-icon>
     <span>Login</span>
   </button>
+
+  <button mat-button [routerLink]="'register'" *ngIf="!isAuthenticated">
+    <mat-icon>person_add</mat-icon>
+    <span>Register</span>
+  </button>
 </mat-toolbar>
+
 <router-outlet></router-outlet>

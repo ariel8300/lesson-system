@@ -1,0 +1,25 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <input
+    matInput
+    type="email"
+    formControlName="email"
+    placeholder="Email Address"
+  />
+  <input
+    matInput
+    type="password"
+    formControlName="password"
+    placeholder="Password"
+  />
+  <input
+    matInput
+    type="password"
+    formControlName="passwordConfirm"
+    placeholder="Confirm Password"
+  />
+  <mat-error *ngIf="registerForm.errors?.['match_error']">
+    Passwords do not match
+  </mat-error>
+
+  <button type="submit" [disabled]="!registerForm.valid">Submit</button>
+</form>
