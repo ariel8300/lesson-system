@@ -6,6 +6,10 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import { User } from 'src/app/shared/common/types';
+import Swal from 'sweetalert2';
+import { RegisterService } from '../services/register.service';
 
 @Component({
   selector: 'app-register',
@@ -27,7 +31,10 @@ export class RegisterComponent {
     ]),
   });
 
-  constructor() {
+  constructor(
+    private registerService: RegisterService,
+    private router: Router
+  ) {
     this.registerForm.addValidators(
       this.createCompareValidator(
         this.registerForm.get('password') as AbstractControl,
@@ -37,7 +44,26 @@ export class RegisterComponent {
   }
 
   onSubmit() {
-    console.log(this.registerForm.value);
+    if (this.registerForm.valid) {
+      const user: User = {
+        email: this.registerForm.value.email as string,
+        password: this.registerForm.value.password as string,
+      };
+
+      this.registerService.register(user).subscribe((res) => {
+        console.log({res});
+
+        // on success redirect to login page
+        // Swal.fire({
+        //   title: 'Success!',
+        //   text: 'You have successfully registered!',
+        //   icon: 'success',
+        //   timer: 2000,
+        // }).then(() => {
+        this.router.navigate(['/login']);
+        // });
+      });
+    }
   }
 
   createCompareValidator(

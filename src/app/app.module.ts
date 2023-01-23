@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { AppComponent } from './app.component';
 import { MatButtonModule } from '@angular/material/button';
 import { LoginModule } from './login/login.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,7 +18,8 @@ import { LoginModule } from './login/login.module';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    LoginModule
+    LoginModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
