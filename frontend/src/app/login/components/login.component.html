@@ -1,1 +1,46 @@
-<button>login</button>
+<section>
+  <h1>Login</h1>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Email Address</mat-label>
+      <input matInput type="email" formControlName="email" />
+      <mat-error *ngIf="loginForm.controls['email'].hasError('required')">
+        Email is required
+      </mat-error>
+      <mat-error *ngIf="loginForm.controls['email'].hasError('email')">
+        Email is invalid
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password" />
+      <mat-error
+        *ngIf="loginForm.controls['password'].hasError('minlength')"
+      >
+        Password must be at least 8 characters long
+      </mat-error>
+      <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
+        Password is required
+      </mat-error>
+      <mat-error
+        *ngIf="loginForm.controls['password'].hasError('maxlength')"
+      >
+        Password cannot be more than 20 characters long
+      </mat-error>
+    </mat-form-field>
+
+    <button
+      mat-flat-button
+      type="submit"
+      color="primary"
+      [disabled]="loginForm.invalid"
+    >
+      <mat-icon>check</mat-icon>
+      Submit
+    </button>
+
+    <p>Don't have an account? <a routerLink="/login">Register</a></p>
+  </form>
+</section>
